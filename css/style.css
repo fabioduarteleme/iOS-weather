@@ -5,6 +5,7 @@ body {
   padding: 0;
   min-height: 100%;
   font-size: 62.5%;
+  overflow-x: hidden;
 }
 
 body {
@@ -14,17 +15,17 @@ body {
   color: white;
   font-weight: 300;
   -webkit-touch-callout: none;
-  /* iOS Safari */
   -webkit-user-select: none;
-  /* Safari */
-  /* Konqueror HTML */
   -moz-user-select: none;
-  /* Old versions of Firefox */
   -ms-user-select: none;
-  /* Internet Explorer/Edge */
   user-select: none;
-  /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .cloudy-video,
@@ -43,14 +44,6 @@ body {
   position: absolute;
 }
 
-.weather.cloudy .storm-video {
-  opacity: 0;
-}
-
-.weather.storm .cloudy-video {
-  opacity: 0;
-}
-
 .weather .bg-video {
   position: fixed;
   top: 0;
@@ -59,11 +52,32 @@ body {
   padding-bottom: 178.164%;
 }
 
-ul,
-li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.weather .bg-video:after {
+  content: "";
+  height: 100%;
+  width: 100vw;
+  position: fixed;
+  z-index: 0;
+  left: 0;
+  top: 0;
+}
+
+.weather.cloudy .storm-video {
+  opacity: 0;
+}
+
+.weather.cloudy .bg-video:after {
+  background: -webkit-gradient(linear, left top, left bottom, from(#09097933), color-stop(50%, #4c92d84d), to(#1771ca));
+  background: linear-gradient(180deg, #09097933 0%, #4c92d84d 50%, #1771ca 100%);
+}
+
+.weather.storm .cloudy-video {
+  opacity: 0;
+}
+
+.weather.storm .bg-video:after {
+  background: -webkit-gradient(linear, left top, left bottom, from(#09097933), color-stop(50%, #0f5ca94d), to(#112436));
+  background: linear-gradient(180deg, #09097933 0%, #0f5ca94d 50%, #112436 100%);
 }
 
 .wrapper {
@@ -72,6 +86,18 @@ li {
   left: 0;
   margin: 0 40px;
   width: calc(100% - 80px);
+}
+
+.wrapper .sticky .header-details {
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: 500ms ease-in-out;
+  transition: 500ms ease-in-out;
+}
+
+.wrapper .sticky .temp-minify {
+  display: block;
+  opacity: 1;
 }
 
 .wrapper header {
@@ -92,12 +118,19 @@ li {
   font-weight: 400;
 }
 
-.wrapper header .temp {
+.wrapper header .temp-minify {
+  font-size: 3.2rem;
+  display: none;
+  opacity: 0;
+  font-weight: 400;
+}
+
+.wrapper header .header-details .temp {
   font-size: 18rem;
 }
 
-.wrapper header .situation,
-.wrapper header .min-max-temp {
+.wrapper header .header-details .situation,
+.wrapper header .header-details .min-max-temp {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -108,12 +141,13 @@ li {
   width: 100%;
   font-size: 4.2rem;
   font-weight: 400;
+  height: 50px;
 }
 
-.wrapper header .situation .min,
-.wrapper header .situation .max,
-.wrapper header .min-max-temp .min,
-.wrapper header .min-max-temp .max {
+.wrapper header .header-details .situation .min,
+.wrapper header .header-details .situation .max,
+.wrapper header .header-details .min-max-temp .min,
+.wrapper header .header-details .min-max-temp .max {
   margin: 0 8px;
 }
 
