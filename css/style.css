@@ -4,7 +4,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100%;
-  font-size: 1vw;
+  font-size: 62.5%;
 }
 
 body {
@@ -13,9 +13,21 @@ body {
   background: linear-gradient(180deg, #090979 0%, #4c92d8 100%);
   color: white;
   font-weight: 300;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
-.cloud-video,
+.cloudy-video,
 .storm-video {
   -webkit-transition: 500ms ease-in-out;
   transition: 500ms ease-in-out;
@@ -31,11 +43,11 @@ body {
   position: absolute;
 }
 
-.weather.cloud .storm-video {
+.weather.cloudy .storm-video {
   opacity: 0;
 }
 
-.weather.storm .cloud-video {
+.weather.storm .cloudy-video {
   opacity: 0;
 }
 
@@ -166,5 +178,23 @@ li {
   font-size: 2.6rem;
   color: #48c8eb;
   font-weight: bold;
+}
+
+@media (min-width: 850px) {
+  .wrapper {
+    width: 850px;
+    margin-left: -425px;
+    left: 50%;
+  }
+  .wrapper header {
+    text-shadow: 3px 0px 24px #232e5acc;
+  }
+}
+
+@media (max-width: 850px) {
+  html,
+  body {
+    font-size: 1vw;
+  }
 }
 /*# sourceMappingURL=style.css.map */
