@@ -120,18 +120,6 @@ li {
   margin: 0 40px;
   width: calc(100% - 80px);
 
-  .sticky {
-    .header-details {
-      height: 0;
-      overflow: hidden;
-      @include default-transition;
-    }
-    .temp-minify {
-      display: block;
-      opacity: 1;
-    }
-  }
-
   header {
     display: flex;
     flex-direction: column;
@@ -145,13 +133,33 @@ li {
     }
     .temp-minify {
       font-size: 3.2rem;
-      display: none;
+      visibility: hidden;
       opacity: 0;
       font-weight: 400;
     }
+
+    &.fixed {
+      .title-details {
+        position: fixed;
+        width: $max-width;
+        max-width: $max-width;
+        top: 45px;
+      }
+      .header-details {
+        margin-top: 43px;
+      }
+      .temp-minify {
+        visibility: visible;
+        opacity: 1;
+        @include slow-transition;
+      }
+    }
+
     .header-details {
+      margin-top: -85px;
       .temp {
         font-size: 18rem;
+        margin-bottom: -25px;
       }
       .situation,
       .min-max-temp {
@@ -169,6 +177,22 @@ li {
       }
     }
   }
+
+  // .weather-resume {
+  //   &.fixed-resume {
+  //     position: fixed;
+  //     width: calc(100% - 212px);
+  //     margin-top: -305px !important;
+  //   }
+  // }
+
+  // .weather-daily {
+  //   &.fixed-daily {
+  //     position: fixed;
+  //     width: calc(100% - 212px);
+  //     margin-top: 0px !important;
+  //   }
+  // }
 
   .card {
     background: #4899e92e;
