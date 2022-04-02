@@ -43,6 +43,26 @@ body {
   user-select: none;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 ul,
 li {
   margin: 0;
@@ -50,27 +70,15 @@ li {
   list-style: none;
 }
 
-.cloudy-video,
-.storm-video {
-  @include default-transition;
+*:focus {
+  outline: 0 !important;
 }
 
-.weather {
-  pointer-events: none;
+.carousel-bg-video {
+  position: fixed !important;
+  width: 100vw;
 
-  iframe {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-  }
-
-  .bg-video {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 0px;
-    padding-bottom: 178.164%;
-
+  .overlay {
     &:after {
       content: "";
       height: 100%;
@@ -80,45 +88,38 @@ li {
       left: 0;
       top: 0;
     }
+    &.cloudy {
+      &:after {
+        background: linear-gradient(
+          180deg,
+          #09097933 0%,
+          #4c92d84d 50%,
+          #1771ca 100%
+        );
+      }
+    }
+    &.storm {
+      &:after {
+        background: linear-gradient(
+          180deg,
+          #09097933 0%,
+          #0f5ca94d 50%,
+          #112436 100%
+        );
+      }
+    }
   }
 
-  &.cloudy {
-    .storm-video {
-      opacity: 0;
-    }
-
-    .bg-video:after {
-      background: linear-gradient(
-        180deg,
-        #09097933 0%,
-        #4c92d84d 50%,
-        #1771ca 100%
-      );
-    }
-  }
-
-  &.storm {
-    .cloudy-video {
-      opacity: 0;
-    }
-
-    .bg-video:after {
-      background: linear-gradient(
-        180deg,
-        #09097933 0%,
-        #0f5ca94d 50%,
-        #112436 100%
-      );
-    }
+  video {
+    object-fit: cover;
   }
 }
-
 .wrapper {
   position: absolute;
   top: 0;
   left: 0;
-  margin: 0 40px;
-  width: calc(100% - 80px);
+  margin: 0;
+  width: 100%;
 
   header {
     display: flex;
@@ -130,6 +131,7 @@ li {
     .city {
       font-size: 6rem;
       font-weight: 400;
+      line-height: 0;
     }
     .temp-minify {
       font-size: 3.2rem;
@@ -141,9 +143,9 @@ li {
     &.fixed {
       .title-details {
         position: fixed;
-        width: $max-width;
-        max-width: $max-width;
-        top: 45px;
+        width: calc(100vw - 11px);
+        top: 103px;
+        line-height: 50px;
       }
       .header-details {
         margin-top: 43px;
@@ -151,15 +153,14 @@ li {
       .temp-minify {
         visibility: visible;
         opacity: 1;
-        @include slow-transition;
+        @include default-transition;
       }
     }
 
     .header-details {
-      margin-top: -85px;
       .temp {
         font-size: 18rem;
-        margin-bottom: -25px;
+        line-height: 20vw;
       }
       .situation,
       .min-max-temp {
@@ -169,7 +170,6 @@ li {
         width: 100%;
         font-size: 4.2rem;
         font-weight: 400;
-        height: 50px;
         .min,
         .max {
           margin: 0 8px;
@@ -178,27 +178,16 @@ li {
     }
   }
 
-  // .weather-resume {
-  //   &.fixed-resume {
-  //     position: fixed;
-  //     width: calc(100% - 212px);
-  //     margin-top: -305px !important;
-  //   }
-  // }
-
-  // .weather-daily {
-  //   &.fixed-daily {
-  //     position: fixed;
-  //     width: calc(100% - 212px);
-  //     margin-top: 0px !important;
-  //   }
-  // }
+  section.fixed-resume {
+    margin-top: -200px;
+    @include default-transition();
+  }
 
   .card {
     background: #4899e92e;
     border-radius: 15px;
     padding: 18px;
-    margin-bottom: 14px;
+    margin: 0 40px 14px 40px;
     min-height: 100px;
     backdrop-filter: blur(5px);
   }
@@ -206,6 +195,7 @@ li {
   .weather-resume {
     font-size: 4rem;
     font-weight: 400;
+    @include fast-transition();
     .message {
       font-weight: 400;
       font-size: 3rem;

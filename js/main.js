@@ -3,46 +3,47 @@
 
 
 
-// let controller = new ScrollMagic.Controller();
+  $('.carousel-bg-video').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: true,
+    draggable: false,
+    asNavFor: '.carousel-content'
+  });
 
-// //https://scrollmagic.io/examples/basic/responsive_duration.html
 
-// $(function () {
-
-//   new ScrollMagic.Scene({ triggerElement: "#pin1", duration: 0, offset: 60, triggerHook: 0.1, })
-//     .setPin("#current-city")
-//     .setClassToggle("#current-city", "sticky")
-//     .addIndicators()
-//     .addTo(controller);
-
-//   new ScrollMagic.Scene({ triggerElement: "#pin2", duration: 0, offset: 70, triggerHook: 0.3, })
-//     .setPin("#card")
-//     .setClassToggle("#current-city", "sticky")
-//     .addIndicators()
-//     .addTo(controller);
-// });
+$('.carousel-content').slick({
+    asNavFor: '.carousel-bg-video',
+    dots: false,
+    arrows: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    edgeFriction: 0.15,
+    touchThreshold: 5,
+  });
 
 
 
 $(window).scroll(function(){
     let scrollPage = $(window).scrollTop();
     let rangeDetails = 300
-    //let rangeWeatherResume = 300
 
-    if(scrollPage >= 57){
+    if(scrollPage >= 30){
         $('header').addClass('fixed');
     } else {
         $('header').removeClass('fixed');
     }
 
-    // if(scrollPage >= 183){
-    //     $('.weather-resume').addClass('fixed-resume');
-    // } else {
-    //     $('.weather-resume').removeClass('fixed-resume');
-    // }
+    if(scrollPage >= 20){
+        $('.weather-resume').addClass('fixed-resume');
+    } else {
+        $('.weather-resume').removeClass('fixed-resume');
+    }
 
-    $('.header-details').css("opacity", 1- scrollPage / rangeDetails * 3);
-    // $('.weather-resume').css("margin-top", 1- scrollPage / rangeWeatherResume * 200);
+    $('.header-details').css("opacity", 1- scrollPage / rangeDetails * 10);
 
     console.log(scrollPage)
   });

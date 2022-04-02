@@ -21,6 +21,26 @@ body {
   user-select: none;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 ul,
 li {
   margin: 0;
@@ -28,31 +48,16 @@ li {
   list-style: none;
 }
 
-.cloudy-video,
-.storm-video {
-  -webkit-transition: 500ms ease-in-out;
-  transition: 500ms ease-in-out;
+*:focus {
+  outline: 0 !important;
 }
 
-.weather {
-  pointer-events: none;
+.carousel-bg-video {
+  position: fixed !important;
+  width: 100vw;
 }
 
-.weather iframe {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-}
-
-.weather .bg-video {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 0px;
-  padding-bottom: 178.164%;
-}
-
-.weather .bg-video:after {
+.carousel-bg-video .overlay:after {
   content: "";
   height: 100%;
   width: 100vw;
@@ -62,30 +67,27 @@ li {
   top: 0;
 }
 
-.weather.cloudy .storm-video {
-  opacity: 0;
-}
-
-.weather.cloudy .bg-video:after {
+.carousel-bg-video .overlay.cloudy:after {
   background: -webkit-gradient(linear, left top, left bottom, from(#09097933), color-stop(50%, #4c92d84d), to(#1771ca));
   background: linear-gradient(180deg, #09097933 0%, #4c92d84d 50%, #1771ca 100%);
 }
 
-.weather.storm .cloudy-video {
-  opacity: 0;
-}
-
-.weather.storm .bg-video:after {
+.carousel-bg-video .overlay.storm:after {
   background: -webkit-gradient(linear, left top, left bottom, from(#09097933), color-stop(50%, #0f5ca94d), to(#112436));
   background: linear-gradient(180deg, #09097933 0%, #0f5ca94d 50%, #112436 100%);
+}
+
+.carousel-bg-video video {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .wrapper {
   position: absolute;
   top: 0;
   left: 0;
-  margin: 0 40px;
-  width: calc(100% - 80px);
+  margin: 0;
+  width: 100%;
 }
 
 .wrapper header {
@@ -104,6 +106,7 @@ li {
 .wrapper header .city {
   font-size: 6rem;
   font-weight: 400;
+  line-height: 0;
 }
 
 .wrapper header .temp-minify {
@@ -115,9 +118,9 @@ li {
 
 .wrapper header.fixed .title-details {
   position: fixed;
-  width: 850px;
-  max-width: 850px;
-  top: 45px;
+  width: calc(100vw - 11px);
+  top: 103px;
+  line-height: 50px;
 }
 
 .wrapper header.fixed .header-details {
@@ -127,17 +130,13 @@ li {
 .wrapper header.fixed .temp-minify {
   visibility: visible;
   opacity: 1;
-  -webkit-transition: 1000ms ease-in-out;
-  transition: 1000ms ease-in-out;
-}
-
-.wrapper header .header-details {
-  margin-top: -85px;
+  -webkit-transition: 500ms ease-in-out;
+  transition: 500ms ease-in-out;
 }
 
 .wrapper header .header-details .temp {
   font-size: 18rem;
-  margin-bottom: -25px;
+  line-height: 20vw;
 }
 
 .wrapper header .header-details .situation,
@@ -152,7 +151,6 @@ li {
   width: 100%;
   font-size: 4.2rem;
   font-weight: 400;
-  height: 50px;
 }
 
 .wrapper header .header-details .situation .min,
@@ -162,11 +160,17 @@ li {
   margin: 0 8px;
 }
 
+.wrapper section.fixed-resume {
+  margin-top: -200px;
+  -webkit-transition: 500ms ease-in-out;
+  transition: 500ms ease-in-out;
+}
+
 .wrapper .card {
   background: #4899e92e;
   border-radius: 15px;
   padding: 18px;
-  margin-bottom: 14px;
+  margin: 0 40px 14px 40px;
   min-height: 100px;
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
@@ -175,6 +179,8 @@ li {
 .wrapper .weather-resume {
   font-size: 4rem;
   font-weight: 400;
+  -webkit-transition: 250ms ease-in-out;
+  transition: 250ms ease-in-out;
 }
 
 .wrapper .weather-resume .message {
